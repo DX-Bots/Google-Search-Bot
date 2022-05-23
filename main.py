@@ -92,7 +92,7 @@ async def cb_handler(bot, update):
     if update.data == "donateme":
         await update.message.edit_text(
             text=BUTTON_TEXT.format(update.from_user.mention),
-            reply_markup=START_BUTTONS,
+            reply_markup=PAY_BUTTONS,
             disable_web_page_preview=True
         )
     elif update.data == "upidata":
