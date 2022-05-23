@@ -6,28 +6,24 @@ from requests.utils import requote_uri
 from pyrogram import Client, filters
 from pyrogram.types import *
 
-API = "https://api.abirhasan.wtf/google?query="
-
 
 Bot = Client(
-    "Google-Search-Bot",
+    "Donate",
     bot_token = os.environ["BOT_TOKEN"],
     api_id = int(os.environ["API_ID"]),
     api_hash = os.environ["API_HASH"]
 )
 
 
-START_TEXT = """Hello {}
-I am a google search bot.
+START_TEXT = """Hey! {}
+☞ Very Happy to Know that You are Donating Us.
 
-> `I can search from google. Use me in inline.`
+Thanks For Using [Our Bots](https://t.me/+KYLCdC4XfcdmNGVl).
 
-Made by @FayasNoushad"""
+Made with love By [You](tg://settings)"""
 
-JOIN_BUTTON = [
-    InlineKeyboardButton(
-        text='⚙ Join Updates Channel ⚙',
-        url='https://telegram.me/FayasNoushad'
+DONATE_BUTTON = [
+    InlineKeyboardButton(text='Donate 💸', callback_data='donateme'
     )
 ]
 
@@ -36,68 +32,26 @@ JOIN_BUTTON = [
 async def start(bot, update):
     await update.reply_text(
         text=START_TEXT.format(update.from_user.mention),
-        reply_markup=InlineKeyboardMarkup([JOIN_BUTTON]),
+        reply_markup=InlineKeyboardMarkup([DONATE_BUTTON]),
         disable_web_page_preview=True,
         quote=True
     )
 
 
-@Bot.on_message(filters.private & filters.command(["google"]))
+@Bot.on_message(filters.private & filters.command(["donate"]))
 async def filter(bot, update):
     await update.reply_text(
-        text="`Click the button below for searching...`",
+        text="Click the Below Button to Donate Us",
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text="Search Here", switch_inline_query_current_chat=update.text)],
-                [InlineKeyboardButton(text="Search in another chat", switch_inline_query=update.text)]
-            ]
+                [InlineKeyboardButton(text="UPI", callback_data="upidata"),
+                [InlineKeyboardButton(text="PayPal", url=https://paypal.me/AbhishekKumarIN47)]
+            ],
+            [
+                [InlineKeyboardButton(text="😥 Close", callback_data="closedata")]
         ),
         disable_web_page_preview=True,
         quote=True
     )
-
-
-@Bot.on_inline_query()
-async def inline(bot, update):
-    results = google(update.query)
-    answers = []
-    for result in results:
-        answers.append(
-            InlineQueryResultArticle(
-                title=result["title"],
-                description=result["description"],
-                input_message_content=InputTextMessageContent(
-                    message_text=result["text"],
-                    disable_web_page_preview=True
-                ),
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [InlineKeyboardButton(text="Link", url=result["link"])],
-                        JOIN_BUTTON
-                    ]
-                )
-            )
-        )
-    await update.answer(answers)
-
-
-def google(query):
-    r = requests.get(API + requote_uri(query))
-    informations = r.json()["results"][:50]
-    results = []
-    for info in informations:
-        text = f"**Title:** `{info['title']}`"
-        text += f"\n**Description:** `{info['description']}`"
-        text += f"\n\nMade by @FayasNoushad"
-        results.append(
-            {
-                "title": info['title'],
-                "description": info['description'],
-                "text": text,
-                "link": info['link']
-            }
-        )
-    return results
-
 
 Bot.run()
