@@ -1,4 +1,4 @@
-# Author: Fayas (https://github.com/FayasNoushad) (@FayasNoushad)
+# Developed By : Abhishek Kumar (https://telegram.me/TheTeleRoid) 
 
 import os
 import requests
@@ -20,7 +20,7 @@ START_TEXT = """Hey! {}
 
 Thanks For Using [Our Bots](https://t.me/+KYLCdC4XfcdmNGVl).
 
-Made with love By [You](tg://settings)"""
+Made with love For [You](tg://settings)"""
 
 DONATE_BUTTON = [
     InlineKeyboardButton(text='Donate 💸', callback_data='donateme'
@@ -53,5 +53,6 @@ async def filter(bot, update):
         disable_web_page_preview=True,
         quote=True
     )
+
 
 Bot.run()
