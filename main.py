@@ -38,7 +38,7 @@ BUTTON_TEXT = """ Click the Below Buttons To Donate Us. """
 
 UPI_BUTTONS = [
                 [InlineKeyboardButton(text=" Back ", callback_data="back"),
-                 InlineKeyboardButton(text=" PayPal ", url=https://paypal.me/AbhishekKumarIN47)]
+                 InlineKeyboardButton(text=" PayPal ", url="https://paypal.me/AbhishekKumarIN47")]
             ],
             [
                 [InlineKeyboardButton(text="😥 Close", callback_data="close")]
@@ -46,7 +46,7 @@ UPI_BUTTONS = [
 
 PAY_BUTTONS = [
                 [InlineKeyboardButton(text="UPI", callback_data="upidata"),
-                 InlineKeyboardButton(text="PayPal", url=https://paypal.me/AbhishekKumarIN47)]
+                 InlineKeyboardButton(text="PayPal", url="https://paypal.me/AbhishekKumarIN47")]
             ],
             [
                 [InlineKeyboardButton(text="😥 Close", callback_data="close")]
@@ -70,7 +70,7 @@ async def filter(bot, update):
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton(text="UPI", callback_data="upidata"),
-                 InlineKeyboardButton(text="PayPal", url=https://paypal.me/AbhishekKumarIN47)]
+                 InlineKeyboardButton(text="PayPal", url="https://paypal.me/AbhishekKumarIN47")]
             ],
             [
                 [InlineKeyboardButton(text="😥 Close", callback_data="close")]
