@@ -36,22 +36,29 @@ Or Contact Us :- [Abhishek Kumar](https://telegram.me/HelpLessBoi). """
 
 BUTTON_TEXT = """ Click the Below Buttons To Donate Us. """
 
-UPI_BUTTONS = [
-                [InlineKeyboardButton(text=" Back ", callback_data="back"),
-                 InlineKeyboardButton(text=" PayPal ", url="https://paypal.me/AbhishekKumarIN47")]
-            ],
-            [
-                [InlineKeyboardButton(text="😥 Close", callback_data="close")]
-            ]
+UPI_BUTTONS = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(" Back", callback_data="back"),
+            InlineKeyboardButton(" PayPal ", url="https://paypal.me/AbhishekKumarIN47")
+        ],
+        [
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 
-PAY_BUTTONS = [
-                [InlineKeyboardButton(text="UPI", callback_data="upidata"),
-                 InlineKeyboardButton(text="PayPal", url="https://paypal.me/AbhishekKumarIN47")]
-            ],
-            [
-                [InlineKeyboardButton(text="😥 Close", callback_data="close")]
-            ]
-
+PAY_BUTTONS = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(" UPI ", callback_data="upidata"),
+            InlineKeyboardButton(" PayPal ", url="https://paypal.me/AbhishekKumarIN47")
+        ],
+        [
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 
 @Bot.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
