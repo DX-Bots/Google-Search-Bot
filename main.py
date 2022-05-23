@@ -22,10 +22,35 @@ Thanks For Using [Our Bots](https://t.me/+KYLCdC4XfcdmNGVl).
 
 Made with love For [You](tg://settings)"""
 
-DONATE_BUTTON = [
+DONATE_BUTTONS = [
     InlineKeyboardButton(text='Donate 💸', callback_data='donateme'
     )
 ]
+
+DONATE_TEXT = """Hey! {}
+You Can Donate Us Using UPI. 
+
+PayTm/PhonePe/GooglePay - `sk7062563@okhdfcbank`
+
+Or Contact Us :- [Abhishek Kumar](https://telegram.me/HelpLessBoi). """
+
+BUTTON_TEXT = """ Click the Below Buttons To Donate Us. """
+
+UPI_BUTTONS = [
+                [InlineKeyboardButton(text=" Back ", callback_data="back"),
+                [InlineKeyboardButton(text=" PayPal ", url=https://paypal.me/AbhishekKumarIN47)]
+            ],
+            [
+                [InlineKeyboardButton(text="😥 Close", callback_data="close")]
+            ]
+
+PAY_BUTTONS = [
+                [InlineKeyboardButton(text="UPI", callback_data="upidata"),
+                [InlineKeyboardButton(text="PayPal", url=https://paypal.me/AbhishekKumarIN47)]
+            ],
+            [
+                [InlineKeyboardButton(text="😥 Close", callback_data="close")]
+            ]
 
 
 @Bot.on_message(filters.private & filters.command(["start"]))
@@ -41,18 +66,41 @@ async def start(bot, update):
 @Bot.on_message(filters.private & filters.command(["donate"]))
 async def filter(bot, update):
     await update.reply_text(
-        text="Click the Below Button to Donate Us",
+        text="Click the Following Button to Donate Us.",
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton(text="UPI", callback_data="upidata"),
                 [InlineKeyboardButton(text="PayPal", url=https://paypal.me/AbhishekKumarIN47)]
             ],
             [
-                [InlineKeyboardButton(text="😥 Close", callback_data="closedata")]
+                [InlineKeyboardButton(text="😥 Close", callback_data="close")]
+            ]
         ),
         disable_web_page_preview=True,
         quote=True
     )
 
+@Bot.on_callback_query()
+async def cb_handler(bot, update):
+    if update.data == "donateme":
+        await update.message.edit_text(
+            text=BUTTON_TEXT.format(update.from_user.mention),
+            reply_markup=START_BUTTONS,
+            disable_web_page_preview=True
+        )
+    elif update.data == "upidata":
+        await update.message.edit_text(
+            text=DONATE_TEXT,
+            reply_markup=UPI_BUTTONS,
+            disable_web_page_preview=True
+        )
+    elif update.data == "back":
+        await update.message.edit_text(
+            text=BUTTON_TEXT,
+            reply_markup=PAY_BUTTONS,
+            disable_web_page_preview=True
+        )
+    else:
+        await update.message.delete()
 
 Bot.run()
